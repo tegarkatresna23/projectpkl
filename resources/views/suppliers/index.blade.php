@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div>
-                    <h3 class="text-center my-4">Data Suppliers</h3>
+                    <h3 class="text-center my-4">DATA SUPPLIERS</h3>
                     <hr>
                 </div>
                 <div class="card border-0 shadow-sm rounded">
@@ -25,10 +25,10 @@
                             <thead class="table-light text-center">
                                 
                                 <tr>
-                                    <th>Nama</th>
-                                    <th>Kontak</th>
-                                    <th>Alamat</th>
-                                    <th style="width: 20%">Aksi</th>
+                                    <th>NAMA</th>
+                                    <th>KONTAK</th>
+                                    <th>ALAMAT</th>
+                                    <th style="width: 20%">AKSI</th>
                                 </tr>
                             </thead>
                             <tbody>

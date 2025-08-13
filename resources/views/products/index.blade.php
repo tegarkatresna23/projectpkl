@@ -13,37 +13,37 @@
         <div class="row">
             <div class="col-md-12">
                 <div>
-                    <h3 class="text-center my-4">Tutorial Laravel 12 untuk Pemula</h3>
-                    <h5 class="text-center"><a href="https://santrikoding.com">www.santrikoding.com</a></h5>
+                    <h3 class="text-center my-4">DATA PRODUCTS</h3>
+
                     <hr>
                 </div>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <a href="{{ route('products.create') }}" class="btn btn-md btn-success mb-3">ADD PRODUCT</a>
-                        <table class="table table-bordered">
+                        <a href="{{ route('products.create') }}" class="btn btn-md btn-success mb-3">TAMBAHKAN </a>
+                        <table class="table table-bordered text-center">
                             <thead>
                                 <tr>
-                                    <th scope="col">CATEGORY</th>
-                                    <th scope="col">CODE</th>
-                                    <th scope="col">NAME</th>
-                                    <th scope="col">PURCHASE PRICE</th>
-                                    <th scope="col">SELLING PRICE</th>
+                                    <th scope="col">KATEGORI</th>
+                                    <th scope="col">KODE</th>
+                                    <th scope="col">NAMA</th>
+                                    <th scope="col">HARGA PEMBELIAN</th>
+                                    <th scope="col">HARGA PENJUALAN</th>
                                     <th scope="col">STOCK</th>
-                                    <th scope="col" style="width: 20%">ACTIONS</th>
+                                    <th scope="col" style="width: 20%">AKSI</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse ($products as $product)
                                     <tr>
-                                        <td>{{ $product->category?->name }}</td>
+                                        <td>{{ $product->category->name ?? '-' }}</td>
                                         <td>{{ $product->code }}</td>
                                         <td>{{ $product->name }}</td>
-                                        <td>{{ "Rp " . number_format($product->purchase_price,2,',','.') }}</td>
-                                        <td>{{ "Rp " . number_format($product->selling_price,2,',','.') }}</td>
+                                        <td>{{ 'Rp ' . number_format($product->purchase_price, 2, ',', '.') }}</td>
+                                        <td>{{ 'Rp ' . number_format($product->selling_price, 2, ',', '.') }}</td>
                                         <td>{{ $product->stock }}</td>
                                         <td class="text-center">
                                             <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('products.destroy', $product->id) }}" method="POST">
-                                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-dark">SHOW</a>
+                                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-dark">LIHAT</a>
                                                 <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-primary">EDIT</a>
                                                 @csrf
                                                 @method('DELETE')
@@ -52,9 +52,13 @@
                                         </td>
                                     </tr>
                                 @empty
-                                    <div class="alert alert-danger">
-                                        Data Products belum ada.
-                                    </div>
+                                    <tr>
+                                        <td colspan="7">
+                                            <div class="alert alert-danger m-0">
+                                                Data Products belum ada.
+                                            </div>
+                                        </td>
+                                    </tr>
                                 @endforelse
                             </tbody>
                         </table>
@@ -69,6 +73,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+        // message with sweetalert
         @if(session('success'))
             Swal.fire({
                 icon: "success",

@@ -33,7 +33,7 @@
                             <p>{{ 'Rp ' . number_format($purchase->total_amount, 2, ',', '.') }}</p>
                         </div>
                         <hr>
-                        <a href="{{ route('purchases.index') }}" class="btn btn-sm btn-secondary">Kembali ke Daftar</a>
+                        <a href="{{ route('purchases.index') }}" class="btn btn-sm btn-secondary">Kembali</a>
                     </div>
                 </div>
             </div>

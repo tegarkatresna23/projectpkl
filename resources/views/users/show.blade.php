@@ -25,7 +25,7 @@
                         </p>
                         <p><strong>Dibuat pada:</strong> {{ $user->created_at->format('d M Y H:i') }}</p>
                         <p><strong>Diupdate pada:</strong> {{ $user->updated_at->format('d M Y H:i') }}</p>
-                        <a href="{{ route('users.index') }}" class="btn btn-sm btn-secondary mt-3">Kembali ke Daftar User</a>
+                        <a href="{{ route('users.index') }}" class="btn btn-sm btn-secondary mt-3">Kembali</a>
                     </div>
                 </div>
             </div>

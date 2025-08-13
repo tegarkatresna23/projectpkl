@@ -13,19 +13,19 @@
         <div class="row">
             <div class="col-md-12">
                 <div>
-                    <h3 class="text-center my-4">Tutorial Laravel 12 untuk Pemula</h3>
-                    <h5 class="text-center"><a href="https://santrikoding.com">www.santrikoding.com</a></h5>
+                    <h3 class="text-center my-4">DATA CATEGORIES</h3>
+
                     <hr>
                 </div>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <a href="{{ route('categories.create') }}" class="btn btn-md btn-success mb-3">ADD CATEGORY</a>
-                        <table class="table table-bordered">
+                        <a href="{{ route('categories.create') }}" class="btn btn-md btn-success mb-3">TAMBAHKAN</a>
+                        <table class="table table-bordered text-center">
                             <thead>
                                 <tr>
-                                    <th scope="col">NAME</th>
-                                    <th scope="col">DESCRIPTION</th>
-                                    <th scope="col" style="width: 20%">ACTIONS</th>
+                                    <th scope="col">NAMA</th>
+                                    <th scope="col">KETERANGAN</th>
+                                    <th scope="col" style="width: 20%">AKSI</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,8 +35,8 @@
                                         <td>{{ $categorie->description }}</td>
                                         <td class="text-center">
                                             <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('categories.destroy', $categorie->id) }}" method="POST">
-                                                <a href="{{ route('categories.show', $categorie->id) }}" class="btn btn-sm btn-dark">SHOW</a>
-                                                <a href="{{ route('categories.edit', $categorie->id) }}" class="btn btn-sm btn-primary">EDIT</a>
+                                                <a href="{{ route('categories.show', $categorie->id) }}" class="btn btn-sm btn-dark">LIHAT</a>
+                                                <a href="{{ route('categories.edit', $categorie->id) }}" class="btn btn-sm btn-primary">UBAH</a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>

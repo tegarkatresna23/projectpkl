@@ -13,13 +13,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div>
-                    <h3 class="text-center my-4">Data Pengguna</h3>
+                    <h3 class="text-center my-4">DATA PENGGUNA</h3>
                     <hr>
                 </div>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <a href="{{ route('users.create') }}" class="btn btn-md btn-success mb-3">TAMBAH PENGGUNA</a>
-                        <table class="table table-bordered">
+                        <a href="{{ route('users.create') }}" class="btn btn-md btn-success mb-3">TAMBAHKAN</a>
+                        <table class="table table-bordered text-center">
                             <thead>
                                 <tr>
                                     <th scope="col">NAMA</th>

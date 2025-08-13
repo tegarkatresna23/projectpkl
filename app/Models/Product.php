@@ -10,14 +10,7 @@ class Product extends Model
     use HasFactory;
 
     /**
-     * Nama tabel
-     *
-     * @var string
-     */
-    protected $table = 'products';
-
-    /**
-     * Kolom yang boleh diisi massal
+     * Kolom yang bisa diisi mass assignment
      *
      * @var array
      */
@@ -34,8 +27,9 @@ class Product extends Model
     /**
      * Relasi ke kategori
      */
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
+   public function category()
+{
+    return $this->belongsTo(Categorie::class, 'category_id');
+}
+
 }
