@@ -9,16 +9,30 @@ class StockLog extends Model
 {
     use HasFactory;
 
+    /**
+     * Tabel yang digunakan
+     *
+     * @var string
+     */
+    protected $table = 'stock_logs';
+
+    /**
+     * Kolom yang bisa diisi
+     *
+     * @var array
+     */
     protected $fillable = [
         'product_id',
-        'quantity',
         'change_type',
-        'description'
+        'quantity',
+        'description',
     ];
 
+    /**
+     * Relasi ke Product
+     */
     public function product()
-   {
-    return $this->belongsTo(Product::class, 'product_id');
-}
-
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

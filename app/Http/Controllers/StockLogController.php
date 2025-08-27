@@ -2,106 +2,111 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StockLog;
-use App\Models\Product;
+use App\Models\StockLog;  
+use App\Models\Product;  // supaya bisa ambil data produk untuk relasi
 use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class StockLogController extends Controller
 {
     /**
-     * Tampilkan semua log stok
+     * index
      */
     public function index(): View
     {
-        $stockLogs = StockLog::with('product')->latest('created_at')->paginate(10);
-        return view('stock_logs.index', compact('stockLogs'));
+        // get all stock logs with product
+        $stockLogs = StockLog::with('product')->latest()->paginate(10);
+
+        return view('stocklogs.index', compact('stockLogs'));
     }
 
     /**
-     * Form tambah log stok
+     * create
      */
-    public function create()
-{
-    $products = Product::all(); // ambil semua produk
-    return view('stock_logs.create', compact('products'));
-}
+    public function create(): View
+    {
+        // ambil data produk untuk pilihan select
+        $products = Product::all();
 
+        return view('stocklogs.create', compact('products'));
+    }
 
     /**
-     * Simpan log stok
+     * store
      */
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'product_id'  => 'required|exists:products,id',
-            'change_type' => 'required|in:in,out',
-            'quantity'    => 'required|integer|min:1',
-            'description' => 'nullable|string'
+            'product_id'   => 'required|exists:products,id',
+            'change_type'  => 'required|in:in,out',
+            'quantity'     => 'required|integer|min:1',
+            'description'  => 'nullable|string'
         ]);
 
         StockLog::create([
-            'product_id'  => $request->product_id,
-            'change_type' => $request->change_type,
-            'quantity'    => $request->quantity,
-            'description' => $request->description,
-            'created_at'  => now()
+            'product_id'   => $request->product_id,
+            'change_type'  => $request->change_type,
+            'quantity'     => $request->quantity,
+            'description'  => $request->description,
         ]);
 
-        return redirect()->route('stock_logs.index')->with('success', 'Log stok berhasil ditambahkan.');
+        return redirect()->route('stocklogs.index')->with(['success' => 'Log stok berhasil ditambahkan!']);
     }
 
     /**
-     * Tampilkan detail log stok
+     * show
      */
-    public function show($id): View
+    public function show(string $id): View
     {
         $stockLog = StockLog::with('product')->findOrFail($id);
-        return view('stock_logs.show', compact('stockLog'));
+
+        return view('stocklogs.show', compact('stockLog'));
     }
 
     /**
-     * Form edit log stok
+     * edit
      */
-    public function edit($id): View
+    public function edit(string $id): View
     {
         $stockLog = StockLog::findOrFail($id);
         $products = Product::all();
-        return view('stock_logs.edit', compact('stockLog', 'products'));
+
+        return view('stocklogs.edit', compact('stockLog', 'products'));
     }
 
     /**
-     * Update log stok
+     * update
      */
     public function update(Request $request, $id): RedirectResponse
     {
         $request->validate([
-            'product_id'  => 'required|exists:products,id',
-            'change_type' => 'required|in:in,out',
-            'quantity'    => 'required|integer|min:1',
-            'description' => 'nullable|string'
+            'product_id'   => 'required|exists:products,id',
+            'change_type'  => 'required|in:in,out',
+            'quantity'     => 'required|integer|min:1',
+            'description'  => 'nullable|string'
         ]);
 
         $stockLog = StockLog::findOrFail($id);
+
         $stockLog->update([
-            'product_id'  => $request->product_id,
-            'change_type' => $request->change_type,
-            'quantity'    => $request->quantity,
-            'description' => $request->description,
+            'product_id'   => $request->product_id,
+            'change_type'  => $request->change_type,
+            'quantity'     => $request->quantity,
+            'description'  => $request->description,
         ]);
 
-        return redirect()->route('stock_logs.index')->with('success', 'Log stok berhasil diperbarui.');
+        return redirect()->route('stocklogs.index')->with(['success' => 'Log stok berhasil diubah!']);
     }
 
     /**
-     * Hapus log stok
+     * destroy
      */
     public function destroy($id): RedirectResponse
     {
         $stockLog = StockLog::findOrFail($id);
         $stockLog->delete();
 
-        return redirect()->route('stock_logs.index')->with('success', 'Log stok berhasil dihapus.');
+        return redirect()->route('stocklogs.index')->with(['success' => 'Log stok berhasil dihapus!']);
     }
 }

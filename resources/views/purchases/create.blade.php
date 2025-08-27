@@ -20,12 +20,10 @@
 
                             <div class="form-group mb-3">
                                 <label class="font-weight-bold">SUPPLIER</label>
-                                <select name="supplier_id" class="form-control @error('supplier_id') is-invalid @enderror">
+                                <select name="supplier_id" class="form-control" required>
                                     <option value="">-- Pilih Supplier --</option>
                                     @foreach($suppliers as $supplier)
-                                        <option value="{{ $supplier->id }}" {{ old('supplier_id') == $supplier->id ? 'selected' : '' }}>
-                                            {{ $supplier->name }}
-                                        </option>
+                                       <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('supplier_id')

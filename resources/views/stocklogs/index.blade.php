@@ -12,62 +12,60 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">
-                <div class="text-center mb-4">
-                    <h3>Tutorial Laravel 12 untuk Pemula</h3>
-                    <h5><a href="https://santrikoding.com">www.santrikoding.com</a></h5>
+                <div>
+                    <h3 class="text-center my-4">DATA STOCKLOG</h3>
                     <hr>
                 </div>
-
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-
-                        <a href="{{ route('stock_logs.create') }}" class="btn btn-success mb-3">ADD STOCK LOG</a>
-
-                        @if($stockLogs->count())
-                        <table class="table table-bordered table-striped">
-                            <thead class="table-dark">
+                        <a href="{{ route('stocklogs.create') }}" class="btn btn-md btn-success mb-3">TAMBAHKAN</a>
+                        <table class="table table-bordered">
+                            <thead class="table-light text-center">
                                 <tr>
                                     <th scope="col">PRODUCT</th>
                                     <th scope="col">CHANGE TYPE</th>
                                     <th scope="col">QUANTITY</th>
                                     <th scope="col">DESCRIPTION</th>
                                     <th scope="col">CREATED AT</th>
-                                    <th scope="col" style="width: 20%">ACTIONS</th>
+                                    <th scope="col" style="width: 20%">AKSI</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($stockLogs as $stockLog)
-                                    <tr>
+                                @forelse ($stockLogs as $stockLog)
+                                    <tr class="text-center">
                                         <td>{{ $stockLog->product->title ?? '-' }}</td>
-                                        <td>{{ ucfirst($stockLog->change_type) }}</td>
+                                        <td>
+                                            @if ($stockLog->change_type === 'in')
+                                                <span class="badge bg-success">IN</span>
+                                            @else
+                                                <span class="badge bg-danger">OUT</span>
+                                            @endif
+                                        </td>
                                         <td>{{ $stockLog->quantity }}</td>
-                                        <td>{{ $stockLog->description ?? '-' }}</td>
+                                        <td>{{ $stockLog->description }}</td>
                                         <td>{{ $stockLog->created_at->format('d-m-Y H:i') }}</td>
-                                        <td class="text-center">
-                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('stock_logs.destroy', $stockLog->id) }}" method="POST">
-                                                <a href="{{ route('stock_logs.show', $stockLog->id) }}" class="btn btn-dark btn-sm">SHOW</a>
-                                                <a href="{{ route('stock_logs.edit', $stockLog->id) }}" class="btn btn-primary btn-sm">EDIT</a>
+                                        <td>
+                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" 
+                                                  action="{{ route('stocklogs.destroy', $stockLog->id) }}" 
+                                                  method="POST">
+                                                <a href="{{ route('stocklogs.show', $stockLog->id) }}" class="btn btn-sm btn-dark">SHOW</a>
+                                                <a href="{{ route('stocklogs.edit', $stockLog->id) }}" class="btn btn-sm btn-primary">EDIT</a>
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm">HAPUS</button>
+                                                <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
                                             </form>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center text-danger">
+                                            Data Stock Logs belum ada.
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
-
-                        <!-- Pagination -->
-                        <div class="d-flex justify-content-center">
-                            {{ $stockLogs->links() }}
-                        </div>
-
-                        @else
-                        <div class="alert alert-warning text-center">
-                            Data Stock Logs belum ada.
-                        </div>
-                        @endif
-
+                        {{ $stockLogs->links() }}
                     </div>
                 </div>
             </div>
@@ -78,7 +76,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        // Message with SweetAlert
+        //message with sweetalert
         @if(session('success'))
             Swal.fire({
                 icon: "success",

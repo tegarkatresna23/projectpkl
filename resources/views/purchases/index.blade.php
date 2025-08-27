@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <title>Data Purchases - SantriKoding.com</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body style="background: lightgray">
 
     <div class="container mt-5">
@@ -23,7 +25,7 @@
                         <table class="table table-bordered text-center">
                             <thead>
                                 <tr>
-                                    <th scope="col">PEMASOK</th>
+                                    <th scope="col">SUPPLIERS</th>
                                     <th scope="col">PENGGUNA</th>
                                     <th scope="col">TANGGAL PEMBELIAN</th>
                                     <th scope="col">JUMLAH TOTAL</th>
@@ -38,9 +40,12 @@
                                         <td>{{ $purchase->purchase_date }}</td>
                                         <td>{{ 'Rp ' . number_format($purchase->total_amount, 2, ',', '.') }}</td>
                                         <td class="text-center">
-                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('purchases.destroy', $purchase->id) }}" method="POST">
-                                                <a href="{{ route('purchases.show', $purchase->id) }}" class="btn btn-sm btn-dark">LIHAT</a>
-                                                <a href="{{ route('purchases.edit', $purchase->id) }}" class="btn btn-sm btn-primary">EDIT</a>
+                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                action="{{ route('purchases.destroy', $purchase->id) }}" method="POST">
+                                                <a href="{{ route('purchases.show', $purchase->id) }}"
+                                                    class="btn btn-sm btn-dark">LIHAT</a>
+                                                <a href="{{ route('purchases.edit', $purchase->id) }}"
+                                                    class="btn btn-sm btn-primary">EDIT</a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
@@ -49,7 +54,8 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5" class="text-center text-danger">Data Purchases belum ada.</td>
+                                        <td colspan="5" class="text-center text-danger">Data Purchases belum ada.
+                                        </td>
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -66,7 +72,7 @@
 
     <script>
         // message with sweetalert
-        @if(session('success'))
+        @if (session('success'))
             Swal.fire({
                 icon: "success",
                 title: "BERHASIL",
@@ -74,7 +80,7 @@
                 showConfirmButton: false,
                 timer: 2000
             });
-        @elseif(session('error'))
+        @elseif (session('error'))
             Swal.fire({
                 icon: "error",
                 title: "GAGAL!",
@@ -86,4 +92,5 @@
     </script>
 
 </body>
+
 </html>
